@@ -1,0 +1,64 @@
+!SESSION 2021-04-29 19:40:07.548 -----------------------------------------------
+eclipse.buildId=4.13.0.I20190916-1045
+java.version=1.8.0_231
+java.vendor=Oracle Corporation
+BootLoader constants: OS=win32, ARCH=x86_64, WS=win32, NL=pt_BR
+Framework arguments:  -product org.eclipse.epp.package.java.product
+Command-line arguments:  -os win32 -ws win32 -arch x86_64 -product org.eclipse.epp.package.java.product
+
+!ENTRY org.eclipse.ui 2 0 2021-04-29 19:41:00.976
+!MESSAGE Warnings while parsing the images from the 'org.eclipse.ui.commandImages' extension point.
+!SUBENTRY 1 org.eclipse.ui 2 0 2021-04-29 19:41:00.976
+!MESSAGE Cannot bind to an undefined command: plug-in='com.genuitec.eclipse.theming.ui', id='com.genuitec.myeclipse.help.darktheme.commandid'
+
+!ENTRY com.genuitec.eclipse.theming.ui 1 0 2021-04-29 19:41:01.772
+!MESSAGE A DevStyle Theme is being activated on this workspace; preparing colors and configuration
+
+!ENTRY com.genuitec.eclipse.theming.ui 1 0 2021-04-29 19:41:01.801
+!MESSAGE DevStyle has archived current color configurations to alternate preferences - will be restored when switching out of the DevStyle Theme
+
+!ENTRY org.eclipse.egit.ui 2 0 2021-04-29 19:41:08.793
+!MESSAGE Warning: The environment variable HOME is not set. The following directory will be used to store the Git
+user global configuration and to define the default location to store repositories: 'C:\Users\Marrowatt'. If this is
+not correct please set the HOME environment variable and restart Eclipse. Otherwise Git for Windows and
+EGit might behave differently since they see different configuration options.
+This warning can be switched off on the Team > Git > Confirmations and Warnings preference page.
+
+!ENTRY com.genuitec.eclipse.webclipse.evergreen 4 0 2021-04-29 19:41:28.134
+!MESSAGE Cannot perform the update. Failed to download artifacts.
+!STACK 1
+org.eclipse.core.runtime.CoreException: An error occurred while collecting items to be installed
+	at com.genuitec.eclipse.webclipse.evergreen.internal.EvergreenUpdateProcess.run(EvergreenUpdateProcess.java:270)
+	at org.eclipse.core.internal.jobs.Worker.run(Worker.java:63)
+Contains: session context was:(profile=C__Users_Marrowatt_eclipse_java-2019-09_eclipse, phase=org.eclipse.equinox.internal.p2.engine.phases.Collect, operand=, action=).
+Contains: No repository found containing: osgi.bundle,org.eclipse.mylyn.commons.core,3.25.2.v20200813-0821
+Contains: No repository found containing: osgi.bundle,org.eclipse.mylyn.commons.notifications.core,1.17.2.v20200813-0821
+Contains: No repository found containing: osgi.bundle,org.eclipse.mylyn.commons.notifications.feed,1.17.2.v20200813-0821
+Contains: No repository found containing: osgi.bundle,org.eclipse.mylyn.commons.notifications.ui,1.17.2.v20200813-0821
+Contains: No repository found containing: osgi.bundle,org.eclipse.mylyn.commons.screenshots,3.25.2.v20200813-0821
+Contains: No repository found containing: osgi.bundle,org.eclipse.mylyn.commons.ui,3.25.2.v20200813-0821
+Contains: No repository found containing: osgi.bundle,org.eclipse.mylyn.commons.workbench,3.25.2.v20200813-0821
+Contains: No repository found containing: org.eclipse.update.feature,org.eclipse.mylyn.commons,3.25.2.v20200813-0821
+Contains: No repository found containing: org.eclipse.update.feature,org.eclipse.mylyn.commons.notifications,1.17.2.v20200813-0821
+!SUBENTRY 1 org.eclipse.equinox.p2.engine 4 4 2021-04-29 19:41:28.135
+!MESSAGE An error occurred while collecting items to be installed
+!SUBENTRY 2 org.eclipse.equinox.p2.engine 4 0 2021-04-29 19:41:28.135
+!MESSAGE session context was:(profile=C__Users_Marrowatt_eclipse_java-2019-09_eclipse, phase=org.eclipse.equinox.internal.p2.engine.phases.Collect, operand=, action=).
+!SUBENTRY 2 org.eclipse.equinox.p2.artifact.repository 4 0 2021-04-29 19:41:28.135
+!MESSAGE No repository found containing: osgi.bundle,org.eclipse.mylyn.commons.core,3.25.2.v20200813-0821
+!SUBENTRY 2 org.eclipse.equinox.p2.artifact.repository 4 0 2021-04-29 19:41:28.135
+!MESSAGE No repository found containing: osgi.bundle,org.eclipse.mylyn.commons.notifications.core,1.17.2.v20200813-0821
+!SUBENTRY 2 org.eclipse.equinox.p2.artifact.repository 4 0 2021-04-29 19:41:28.135
+!MESSAGE No repository found containing: osgi.bundle,org.eclipse.mylyn.commons.notifications.feed,1.17.2.v20200813-0821
+!SUBENTRY 2 org.eclipse.equinox.p2.artifact.repository 4 0 2021-04-29 19:41:28.135
+!MESSAGE No repository found containing: osgi.bundle,org.eclipse.mylyn.commons.notifications.ui,1.17.2.v20200813-0821
+!SUBENTRY 2 org.eclipse.equinox.p2.artifact.repository 4 0 2021-04-29 19:41:28.135
+!MESSAGE No repository found containing: osgi.bundle,org.eclipse.mylyn.commons.screenshots,3.25.2.v20200813-0821
+!SUBENTRY 2 org.eclipse.equinox.p2.artifact.repository 4 0 2021-04-29 19:41:28.135
+!MESSAGE No repository found containing: osgi.bundle,org.eclipse.mylyn.commons.ui,3.25.2.v20200813-0821
+!SUBENTRY 2 org.eclipse.equinox.p2.artifact.repository 4 0 2021-04-29 19:41:28.135
+!MESSAGE No repository found containing: osgi.bundle,org.eclipse.mylyn.commons.workbench,3.25.2.v20200813-0821
+!SUBENTRY 2 org.eclipse.equinox.p2.artifact.repository 4 0 2021-04-29 19:41:28.135
+!MESSAGE No repository found containing: org.eclipse.update.feature,org.eclipse.mylyn.commons,3.25.2.v20200813-0821
+!SUBENTRY 2 org.eclipse.equinox.p2.artifact.repository 4 0 2021-04-29 19:41:28.135
+!MESSAGE No repository found containing: org.eclipse.update.feature,org.eclipse.mylyn.commons.notifications,1.17.2.v20200813-0821
