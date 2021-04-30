@@ -3,6 +3,7 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.Scanner;
 
 public class Menu {
@@ -16,6 +17,21 @@ public class Menu {
         initiate(100);
 
         menu();
+    }
+
+    static ArrayList<Stock> toStock (int limit, String product_id) {
+    	
+    	ArrayList<Stock> estoque = new ArrayList<Stock>();
+
+    	for(int i = 0; i < limit; i++) {
+    		
+    		Random rand = new Random();
+    		
+    		estoque.add(new Stock(product_id, "2020-04-30", (rand.nextInt(99) + 1)));
+    		
+    	}
+    	
+    	return estoque;
     }
 
     public static void initiate (int limit) {
@@ -34,7 +50,9 @@ public class Menu {
 			    
 			    i++;
 			    
-			    if(i < limit) products.add(new Product(data[0], data[20], data[15]));
+			    ArrayList<Stock> stockFilled = toStock(20, data[0]);
+			    
+			    if(i < limit) products.add(new Product(data[0], data[20], data[15], stockFilled));
 			}
 			
 		} catch (FileNotFoundException e1) {
@@ -59,8 +77,10 @@ public class Menu {
             if(control == 1) findById();
 
             if(control == 2) findByName();
+            
+            if(control == 3) removeById();
 
-            if(control >= 3) System.out.println("Bye");
+            if(control >= 4) System.out.println("Bye");
 
         }
     }
@@ -95,4 +115,26 @@ public class Menu {
     	System.out.println(founded != null ? "Encontrado: " + founded.getNome() : "Não encontrado!");
     }
 
+    static void removeById () {
+    	
+    	System.out.println("Para remover, informe o código e a quantidade.");
+    	
+    	System.out.print("Código: ");
+    	
+    	String id = s.next();
+
+    	System.out.print("Quantidade: ");
+    	
+    	String quantidade = s.next();
+
+    	Product founded = null;
+    	
+    	for(Product p:products) {
+    		if(p.getId().equals(id)) founded = p;
+    	}
+
+    	String msg = "Produto não encontrado!";
+    	
+    	System.out.println(msg);
+    }
 }
