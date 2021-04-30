@@ -5,6 +5,12 @@ public class Product {
 	private String nome;
 	private String amount;
 	
+	public Product (String id, String nome, String amount) {
+		this.setId(id);
+		this.setNome(nome);
+		this.setAmount(amount);
+	}
+	
 	public String getId() {
 		return id;
 	}
