@@ -2,7 +2,6 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
-import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
@@ -77,96 +76,19 @@ public class Menu {
 
             int control = s.nextInt();
 
-            if(control == 1) findById();
+            if(control == 1) Controller.findById(products);
 
-            if(control == 2) findByName();
+            if(control == 2) Controller.findByName(products);
             
-            if(control == 3) removeById();
+            if(control == 3) Controller.removeById(products, toStockLimit);
 
             if(control >= 4) loop = false;
 
         }
         
         System.out.println("Bye");
-    }
-    
-    static void findById () {
-    	
-    	System.out.print("Informe o código: ");
-    	
-    	String id = s.next();
-    	
-    	Product founded = null;
-    	
-    	for(Product p:products) {
-    		if(p.getId().equals(id)) founded = p;
-    	}
-    	
-    	System.out.println(founded != null ? "Encontrado: " + founded.getNome() : "Não encontrado!");
-    }
-    
-    static void findByName () {
-    	
-    	System.out.print("Informe o nome: ");
-    	
-    	String nome = s.next();
-    	
-    	Product founded = null;
-    	
-    	for(Product p:products) { // se eu achar mais de um, preciso mostrar em lista
-    		if(p.getNome().contains(nome)) founded = p;
-    	}
-    	
-    	System.out.println(founded != null ? "Encontrado: " + founded.getNome() : "Não encontrado!");
+        
+        s.close();
     }
 
-    static PrintStream removeById () {
-    	
-    	System.out.println("Para remover, informe o código e a quantidade.");
-    	
-    	System.out.print("Código: ");
-    	
-    	String id = s.next();
-
-    	System.out.print("Quantidade: ");
-    	
-    	int quantidade = s.nextInt();
-
-    	Product founded = null;
-    	
-    	for(Product p:products) {
-    		if(p.getId().equals(id)) founded = p;
-    	}
-
-    	String msg = "Produto não encontrado!\n";
-    	
-    	if(founded == null) return System.out.printf(msg);
-
-		Stock lastInsertStock = founded.getStockFilled().get(toStockLimit - 1);
-		
-		if(lastInsertStock.getQuantidade() < quantidade) {
-			
-			System.out.println("Cara, não tem o tanto que tu quer.\nTu quer tirar tudo o que tem?\n1. Sim | 2. Não");
-			
-			int test = s.nextInt();
-			
-			msg = "Respondeste algo errado...\n";
-			
-			if(test == 1) {
-				
-				lastInsertStock.setQuantidade(0);
-				
-				msg = "Produto retirado, 0 em estoque.\n";
-				
-			}
-				
-			if(test == 2) msg = "Produto não alterado.\n";
-			
-			return System.out.printf(msg);
-		}
-    	
-    	lastInsertStock.setQuantidade(lastInsertStock.getQuantidade() - quantidade);
-    	
-		return System.out.printf("Produto retirado.\n");
-    }
 }

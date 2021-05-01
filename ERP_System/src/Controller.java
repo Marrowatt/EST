@@ -1,0 +1,89 @@
+import java.io.PrintStream;
+import java.util.ArrayList;
+import java.util.Scanner;
+
+public class Controller {
+
+	static Scanner s = new Scanner(System.in);
+	
+	static void findById (ArrayList<Product> products) {
+    	
+    	System.out.print("Informe o código: ");
+    	
+    	String id = s.next();
+    	
+    	Product founded = null;
+    	
+    	for(Product p:products) {
+    		if(p.getId().equals(id)) founded = p;
+    	}
+    	
+    	System.out.println(founded != null ? "Encontrado: " + founded.getNome() : "Não encontrado!");
+    }
+    
+    static void findByName (ArrayList<Product> products) {
+    	
+    	System.out.print("Informe o nome: ");
+    	
+    	String nome = s.next();
+    	
+    	Product founded = null;
+    	
+    	for(Product p:products) { // se eu achar mais de um, preciso mostrar em lista
+    		if(p.getNome().contains(nome)) founded = p;
+    	}
+    	
+    	System.out.println(founded != null ? "Encontrado: " + founded.getNome() : "Não encontrado!");
+    }
+
+    static PrintStream removeById (ArrayList<Product> products, int toStockLimit) {
+    	
+    	System.out.println("Para remover, informe o código e a quantidade.");
+    	
+    	System.out.print("Código: ");
+    	
+    	String id = s.next();
+
+    	System.out.print("Quantidade: ");
+    	
+    	int quantidade = s.nextInt();
+
+    	Product founded = null;
+    	
+    	for(Product p:products) {
+    		if(p.getId().equals(id)) founded = p;
+    	}
+
+    	String msg = "Produto não encontrado!\n";
+    	
+    	if(founded == null) return System.out.printf(msg);
+
+		Stock lastInsertStock = founded.getStockFilled().get(toStockLimit - 1);
+		
+		if(lastInsertStock.getQuantidade() < quantidade) {
+			
+			System.out.println("Cara, não tem o tanto que tu quer.\nTu quer tirar tudo o que tem?\n1. Sim | 2. Não");
+			
+			int test = s.nextInt();
+			
+			msg = "Respondeste algo errado...\n";
+			
+			if(test == 1) {
+				
+				lastInsertStock.setQuantidade(0);
+				
+				msg = "Produto retirado, 0 em estoque.\n";
+				
+			}
+				
+			if(test == 2) msg = "Produto não alterado.\n";
+			
+			return System.out.printf(msg);
+		}
+    	
+    	lastInsertStock.setQuantidade(lastInsertStock.getQuantidade() - quantidade);
+    	
+		return System.out.printf("Produto retirado.\n");
+    }
+	
+}
