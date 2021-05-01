@@ -2,6 +2,7 @@ import java.io.BufferedReader;
 import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
+import java.io.PrintStream;
 import java.util.ArrayList;
 import java.util.Random;
 import java.util.Scanner;
@@ -11,6 +12,8 @@ public class Menu {
 	static Scanner s = new Scanner(System.in);
 	
 	static ArrayList<Product> products = new ArrayList<Product>();
+	
+	static int toStockLimit = 20;
 
     public static void main(String[] args) throws Exception {
         
@@ -19,11 +22,11 @@ public class Menu {
         menu();
     }
 
-    static ArrayList<Stock> toStock (int limit, String product_id) {
+    static ArrayList<Stock> toStock (String product_id) {
     	
     	ArrayList<Stock> estoque = new ArrayList<Stock>();
 
-    	for(int i = 0; i < limit; i++) {
+    	for(int i = 0; i < toStockLimit; i++) {
     		
     		Random rand = new Random();
     		
@@ -50,7 +53,7 @@ public class Menu {
 			    
 			    i++;
 			    
-			    ArrayList<Stock> stockFilled = toStock(20, data[0]);
+			    ArrayList<Stock> stockFilled = toStock(data[0]);
 			    
 			    if(i < limit) products.add(new Product(data[0], data[20], data[15], stockFilled));
 			}
@@ -64,15 +67,15 @@ public class Menu {
 
     public static void menu () {
 
-        int control = 0;
+        boolean loop = true;
 
         System.out.println("Bem vindo ao ERP System\nO que você quer fazer?");
 
-        while (control < 3) {
+        while (loop) {
         	
         	System.out.println("1. Busca por código | 2. Busca por nome | 3. Sair");
 
-            control = s.nextInt();
+            int control = s.nextInt();
 
             if(control == 1) findById();
 
@@ -80,9 +83,11 @@ public class Menu {
             
             if(control == 3) removeById();
 
-            if(control >= 4) System.out.println("Bye");
+            if(control >= 4) loop = false;
 
         }
+        
+        System.out.println("Bye");
     }
     
     static void findById () {
@@ -115,7 +120,7 @@ public class Menu {
     	System.out.println(founded != null ? "Encontrado: " + founded.getNome() : "Não encontrado!");
     }
 
-    static void removeById () {
+    static PrintStream removeById () {
     	
     	System.out.println("Para remover, informe o código e a quantidade.");
     	
@@ -125,7 +130,7 @@ public class Menu {
 
     	System.out.print("Quantidade: ");
     	
-    	String quantidade = s.next();
+    	int quantidade = s.nextInt();
 
     	Product founded = null;
     	
@@ -133,8 +138,35 @@ public class Menu {
     		if(p.getId().equals(id)) founded = p;
     	}
 
-    	String msg = "Produto não encontrado!";
+    	String msg = "Produto não encontrado!\n";
     	
-    	System.out.println(msg);
+    	if(founded == null) return System.out.printf(msg);
+
+		Stock lastInsertStock = founded.getStockFilled().get(toStockLimit - 1);
+		
+		if(lastInsertStock.getQuantidade() < quantidade) {
+			
+			System.out.println("Cara, não tem o tanto que tu quer.\nTu quer tirar tudo o que tem?\n1. Sim | 2. Não");
+			
+			int test = s.nextInt();
+			
+			msg = "Respondeste algo errado...\n";
+			
+			if(test == 1) {
+				
+				lastInsertStock.setQuantidade(0);
+				
+				msg = "Produto retirado, 0 em estoque.\n";
+				
+			}
+				
+			if(test == 2) msg = "Produto não alterado.\n";
+			
+			return System.out.printf(msg);
+		}
+    	
+    	lastInsertStock.setQuantidade(lastInsertStock.getQuantidade() - quantidade);
+    	
+		return System.out.printf("Produto retirado.\n");
     }
 }
