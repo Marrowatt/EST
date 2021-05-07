@@ -2,23 +2,23 @@ import java.util.ArrayList;
 
 public class Product {
 
-	private String id;
+	private int id;
 	private String nome;
 	private String amount;
 	private ArrayList<Stock> stockFilled;
 	
-	public Product (String id, String nome, String amount, ArrayList<Stock> stockFilled) {
+	public Product (int id, String nome, String amount, ArrayList<Stock> stockFilled) {
 		this.setId(id);
 		this.setNome(nome);
 		this.setAmount(amount);
 		this.setStockFilled(stockFilled);
 	}
 	
-	public String getId() {
+	public int getId() {
 		return id;
 	}
 	
-	public void setId(String id) {
+	public void setId(int id) {
 		this.id = id;
 	}
 	

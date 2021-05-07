@@ -36,8 +36,10 @@ public class Menu {
     static void seedingATree () {
     	
     	for(Product p:products) {
-    		Node.insert(Integer.parseInt(p.getId()), root);
+    		Node.insert(p.getId(), root, p);
     	}
+    	
+    	root = Node.getRoot();
     }
 
     static ArrayList<Stock> toStock (String product_id) {
@@ -76,7 +78,7 @@ public class Menu {
 				    
 				    ArrayList<Stock> stockFilled = toStock(data[0]);
 				    
-				    products.add(new Product(data[0], data[21], data[15], stockFilled));
+				    products.add(new Product(Integer.parseInt(data[0]), data[21], data[15], stockFilled));
 				}
 				
 				i++;

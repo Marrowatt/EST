@@ -10,12 +10,12 @@ public class Controller {
     	
     	System.out.print("Informe o código: ");
     	
-    	String id = s.next();
+    	int id = s.nextInt();
     	
     	Product founded = null;
     	
     	for(Product p:products) {
-    		if(p.getId().equals(id)) founded = p;
+    		if(p.getId() == id) founded = p;
     	}
     	
     	System.out.println(founded != null ? "Encontrado: " + founded.getNome() : "Não encontrado!");
@@ -42,7 +42,7 @@ public class Controller {
     	
     	System.out.print("Código: ");
     	
-    	String id = s.next();
+    	int id = s.nextInt();
 
     	System.out.print("Quantidade: ");
     	
@@ -51,7 +51,7 @@ public class Controller {
     	Product founded = null;
     	
     	for(Product p:products) {
-    		if(p.getId().equals(id)) founded = p;
+    		if(p.getId() == id) founded = p;
     	}
 
     	String msg = "Produto não encontrado!\n";
@@ -73,7 +73,6 @@ public class Controller {
 				lastInsertStock.setQuantidade(0);
 				
 				msg = "Produto retirado, 0 em estoque.\n";
-				
 			}
 				
 			if(test == 2) msg = "Produto não alterado.\n";
@@ -91,10 +90,19 @@ public class Controller {
     	System.out.printf("Informe o id do produto: ");
     	
     	int id = s.nextInt();
-    	
-        Node focus = root;
         
-        while (focus.getId() != id) {
+        Node founded = rec(root, id);
+        
+        String msg = founded == null ? "Não encontrado." : "Encontrado: " + founded.getProduct().getNome();
+       
+        System.out.println(msg);
+    }
+    
+    static Node rec (Node root, int id) {
+    	
+    	Node focus = root;
+    	
+    	while (focus.getId() != id) {
         	
             if (id < focus.getId()) {
             	focus = focus.getLeft();
@@ -102,14 +110,10 @@ public class Controller {
             	focus = focus.getRight();
             }
             
+            if(focus == null) return null;
         }
-        
-        if(focus == null) {
-        	System.out.println("Não encontrado.");
-        } else {
-        	System.out.println("Encontrado: " + focus.getProduct().toString());
-        }
-       
+    	
+    	return focus;
     }
     
 }

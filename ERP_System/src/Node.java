@@ -1,12 +1,10 @@
-import java.util.ArrayList;
-
 public class Node {
 
 	private int id;
 	private Node left;
 	private Node right;
 	private Node parent;
-	private ArrayList<Product> product;
+	private Product product;
 	
 	public int getId() {
 		return id;
@@ -40,11 +38,11 @@ public class Node {
 		this.parent = parent;
 	}
 	
-	public ArrayList<Product> getProduct() {
+	public Product getProduct() {
 		return product;
 	}
 	
-	public void setProduct(ArrayList<Product> product) {
+	public void setProduct(Product product) {
 		this.product = product;
 	}
 	
@@ -54,11 +52,11 @@ public class Node {
 		this.setId(id);
 	}
 	
-	static void insert (int id) {
-		insert(id, root);
+	static void insert (int id, Product p) {
+		insert(id, root, p);
 	}
 	
-	static void insert (int id, Node node) {
+	static void insert (int id, Node node, Product p) {
 		
 		if (root == null) {
             root = new Node(id);
@@ -78,6 +76,7 @@ public class Node {
                     if (focusNode == null) {
 
                         parent.setLeft(new Node(id));
+                        parent.setProduct(p);
                         
                         return;
                     }
@@ -89,6 +88,7 @@ public class Node {
                     if (focusNode == null) {
                     	
                         parent.setRight(new Node(id));
+                        parent.setProduct(p);
                         
                         return;
                     }
@@ -96,18 +96,9 @@ public class Node {
             }
         }
 	}
-	
-	public Node find (int id) {
 
-        Node focusNode = root;
-
-        while (focusNode.getId() != id) {
-            
-            focusNode = id < focusNode.getId() ? focusNode.left : focusNode.right;
-            
-            if (focusNode == null) return null;
-        }
-        
-        return focusNode;
-    }
+	public static Node getRoot() {
+		
+		return root;
+	}
 }
