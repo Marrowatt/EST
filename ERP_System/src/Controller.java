@@ -86,4 +86,30 @@ public class Controller {
 		return System.out.printf("Produto retirado.\n");
     }
 	
+    static void findByTree (ArrayList<Product> products, Node root) {
+        
+    	System.out.printf("Informe o id do produto: ");
+    	
+    	int id = s.nextInt();
+    	
+        Node focus = root;
+        
+        while (focus.getId() != id) {
+        	
+            if (id < focus.getId()) {
+            	focus = focus.getLeft();
+            } else {
+            	focus = focus.getRight();
+            }
+            
+        }
+        
+        if(focus == null) {
+        	System.out.println("Não encontrado.");
+        } else {
+        	System.out.println("Encontrado: " + focus.getProduct().toString());
+        }
+       
+    }
+    
 }
