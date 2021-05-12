@@ -3,6 +3,8 @@ import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
 import java.util.Random;
 import java.util.Scanner;
 
@@ -10,7 +12,7 @@ public class Menu {
 
 	static Scanner s = new Scanner(System.in);
 	
-	static ArrayList<Product> products = new ArrayList<Product>();
+	static List<Product> products = new ArrayList<Product>();
 	
 	static Node root;
 	
@@ -20,7 +22,7 @@ public class Menu {
 
     public static void main(String[] args) throws Exception {
 
-        initiate(limitingProducts);
+        initiate(limitingProducts + 1);
         
     	seedingATree();
 
@@ -34,6 +36,8 @@ public class Menu {
     }
     
     static void seedingATree () {
+    	
+    	Collections.shuffle(products);
     	
     	for(Product p:products) {
     		Node.insert(p.getId(), root, p);
@@ -112,7 +116,7 @@ public class Menu {
             
             if(control == 5) Controller.findBinary(products);
             
-            if(control < 1 && control > 5) test = false;
+            if(control < 1 || control > 5) test = false;
     		
     	}
     }

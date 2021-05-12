@@ -1,12 +1,12 @@
 import java.io.PrintStream;
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Scanner;
 
 public class Controller {
 
 	static Scanner s = new Scanner(System.in);
 	
-	static void findById (ArrayList<Product> products) {
+	static void findById (List<Product> products) {
     	
     	System.out.print("Informe o código: ");
     	
@@ -21,22 +21,26 @@ public class Controller {
     	System.out.println(founded != null ? "Encontrado: " + founded.getNome() : "Não encontrado!");
     }
     
-    static void findByName (ArrayList<Product> products) {
+	static void findByName (List<Product> products) {
     	
     	System.out.print("Informe o nome: ");
     	
     	String nome = s.next();
     	
-    	Product founded = null;
+    	String prods = "";
     	
-    	for(Product p:products) { // se eu achar mais de um, preciso mostrar em lista
-    		if(p.getNome().contains(nome)) founded = p;
+    	for(Product p:products) {
+    		
+    		if(p.getNome().toLowerCase().contains(nome.toLowerCase())) {
+
+    			prods = prods + "ID: " + p.getId() + " - Nome: " + p.getNome() + "\n";
+    		}
     	}
     	
-    	System.out.println(founded != null ? "Encontrado: " + founded.getNome() : "Não encontrado!");
+    	System.out.println(prods.equals("") == true ? "Não encontrado" : "Encontrado!\n" + prods);
     }
 
-    static PrintStream removeById (ArrayList<Product> products, int toStockLimit) {
+    static PrintStream removeById (List<Product> products, int toStockLimit) {
     	
     	System.out.println("Para remover, informe o código e a quantidade.");
     	
@@ -70,9 +74,10 @@ public class Controller {
 			
 			if(test == 1) {
 				
+				msg = lastInsertStock.getQuantidade() + " produtos retirados, 0 em estoque.\n";
+				
 				lastInsertStock.setQuantidade(0);
 				
-				msg = "Produto retirado, 0 em estoque.\n";
 			}
 				
 			if(test == 2) msg = "Produto não alterado.\n";
@@ -112,7 +117,7 @@ public class Controller {
     	return focus;
     }
     
-    static void findBinary (ArrayList<Product> products) {
+    static void findBinary (List<Product> products) {
     	
     	int min = 0;
     	int max = products.size() - 1;
@@ -121,26 +126,28 @@ public class Controller {
     	
     	int id = s.nextInt();
     	
-    	Product founded = divided(products, min, max, id);
+    	String msg = "Fora do limite.";
     	
-    	String msg = founded == null ? "Não encontrado." : "Encontrado: " + founded.getNome();
-        
+    	if(id <= max && id > min) {
+    		products.sort((o1, o2) -> o1.getId() - o2.getId());
+        	
+        	Product founded = divided(products, min, max, id);
+        	
+        	msg = founded == null ? "Não encontrado." : "Encontrado: " + founded.getNome();
+    	}
+    	
         System.out.println(msg);
     }
     
-    static Product divided (ArrayList<Product> products, int min, int max, int id) {
+    static Product divided (List<Product> products, int min, int max, int id) {
     	
     	int teste = Math.round((min + max) / 2);
     	
-    	Product ret = null;
+    	int pid = products.get(teste).getId();
     	
-    	int p_id = products.get(teste).getId();
+    	if(pid == id) return products.get(teste);
     	
-    	if(p_id == id) return products.get(teste);
-    	
-    	ret = id < p_id ? divided(products, min, teste, id) : divided(products, teste, max, id);
-    	
-    	return ret;
+    	return id < pid ? divided(products, min, teste, id) : divided(products, teste, max, id);
     }
     
 }
