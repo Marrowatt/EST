@@ -48,8 +48,9 @@ public class Node {
 	
 	static Node root;
 	
-	Node (int id) {
+	Node (int id, Product p) {
 		this.setId(id);
+		this.setProduct(p);
 	}
 	
 	static void insert (int id, Product p) {
@@ -59,7 +60,7 @@ public class Node {
 	static void insert (int id, Node node, Product p) {
 		
 		if (root == null) {
-            root = new Node(id);
+            root = new Node(id, p);
         } else {
 
             Node focusNode = root;
@@ -75,8 +76,7 @@ public class Node {
 
                     if (focusNode == null) {
 
-                        parent.setLeft(new Node(id));
-                        parent.setProduct(p);
+                        parent.setLeft(new Node(id, p));
                         
                         return;
                     }
@@ -87,8 +87,7 @@ public class Node {
 
                     if (focusNode == null) {
                     	
-                        parent.setRight(new Node(id));
-                        parent.setProduct(p);
+                        parent.setRight(new Node(id, p));
                         
                         return;
                     }
@@ -101,4 +100,5 @@ public class Node {
 		
 		return root;
 	}
+	
 }

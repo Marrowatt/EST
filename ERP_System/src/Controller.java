@@ -85,7 +85,7 @@ public class Controller {
 		return System.out.printf("Produto retirado.\n");
     }
 	
-    static void findByTree (ArrayList<Product> products, Node root) {
+    static void findByTree (Node root) {
         
     	System.out.printf("Informe o id do produto: ");
     	
@@ -103,17 +103,44 @@ public class Controller {
     	Node focus = root;
     	
     	while (focus.getId() != id) {
-        	
-            if (id < focus.getId()) {
-            	focus = focus.getLeft();
-            } else {
-            	focus = focus.getRight();
-            }
+            
+            focus = id < focus.getId() ? focus.getLeft() : focus.getRight();
             
             if(focus == null) return null;
         }
     	
     	return focus;
+    }
+    
+    static void findBinary (ArrayList<Product> products) {
+    	
+    	int min = 0;
+    	int max = products.size() - 1;
+    	
+    	System.out.printf("Informe o id do produto: ");
+    	
+    	int id = s.nextInt();
+    	
+    	Product founded = divided(products, min, max, id);
+    	
+    	String msg = founded == null ? "Não encontrado." : "Encontrado: " + founded.getNome();
+        
+        System.out.println(msg);
+    }
+    
+    static Product divided (ArrayList<Product> products, int min, int max, int id) {
+    	
+    	int teste = Math.round((min + max) / 2);
+    	
+    	Product ret = null;
+    	
+    	int p_id = products.get(teste).getId();
+    	
+    	if(p_id == id) return products.get(teste);
+    	
+    	ret = id < p_id ? divided(products, min, teste, id) : divided(products, teste, max, id);
+    	
+    	return ret;
     }
     
 }

@@ -92,21 +92,29 @@ public class Menu {
     }
 
     public static void menu () {
-        	
-    	System.out.println("1. Busca por código | 2. Busca por nome | 3. Remover por Id |"
-    			+ " 4. Busca pela árvore | 5. Sair");
-
-        int control = s.nextInt();
-
-        if(control == 1) Controller.findById(products);
-
-        if(control == 2) Controller.findByName(products);
         
-        if(control == 3) Controller.removeById(products, toStockLimit);
+    	boolean test = true;
+    	
+    	while (test == true) {
+    		
+    		System.out.println("1. Busca por código | 2. Busca por nome | "
+        			+ " 3. Remover por Id | 4. Busca pela árvore | 5. Sair");
 
-        if(control == 4) Controller.findByTree(products, root);
-        
-        menu();
+            int control = s.nextInt();
+
+            if(control == 1) Controller.findById(products);
+
+            if(control == 2) Controller.findByName(products);
+            
+            if(control == 3) Controller.removeById(products, toStockLimit);
+
+            if(control == 4) Controller.findByTree(root);
+            
+            if(control == 5) Controller.findBinary(products);
+            
+            if(control < 1 && control > 5) test = false;
+    		
+    	}
     }
 
 }
